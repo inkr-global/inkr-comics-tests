@@ -1,5 +1,5 @@
 const { chromium } = require("playwright");
-const expect = require("expect");
+const { expect } = require("expect");
 
 
 (async () => {
@@ -10,12 +10,13 @@ const expect = require("expect");
   // Change checklyhq.com to your site's URL,
   // or, even better, define a SITE_URL environment variable
   // to reuse it across your browser checks
-  await page.goto(process.env.YOUR_SITE_URL || "");
+  await page.goto(`https://comics.inkr.com?${Date.now()}`);
 
   // Inject a PerformanceObserver and access web performance metrics
   const LCP = await page.evaluate(() => {
     return new Promise((resolve) => {
-      new PerformanceObserver((list) => {
+      // @ts-ignore PerformanceObserver API is browser-only
+      new PerformanceObserver((list: PerformanceObserverEntryList) => {
         const entries = list.getEntries();
         const LCP = entries.at(-1);
         resolve(LCP?.startTime);
