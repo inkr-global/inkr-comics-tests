@@ -29,6 +29,7 @@ const { expect } = require("expect");
 
   // Add custom assertions to fail your check
   // if your web performance degraded
+  console.log("LCP", LCP);
   expect(parseInt(LCP, 10)).toBeLessThan(1550);
 
   // Close the browser and end the session
