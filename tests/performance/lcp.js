@@ -15,8 +15,7 @@ const { expect } = require("expect");
   // Inject a PerformanceObserver and access web performance metrics
   const LCP = await page.evaluate(() => {
     return new Promise((resolve) => {
-      // @ts-ignore PerformanceObserver API is browser-only
-      new PerformanceObserver((list: PerformanceObserverEntryList) => {
+      new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const LCP = entries.at(-1);
         resolve(LCP?.startTime);
